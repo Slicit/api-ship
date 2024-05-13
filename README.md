@@ -4,7 +4,7 @@
 
 Built with:
 
-```docker-engine 20.10.24`
+`docker-engine 20.10.24`
 
 `docker-compose 2.26.0`
 
@@ -20,7 +20,9 @@ PG_DATABASE=your_pg_database
 Then you can build and run the docker container
 
 ```bash
-docker-compose up -d
+docker-compose up -d # run the rails server
 
-docker exec api_ship rspec
+docker exec api_ship rspec # execute the tests
 ```
+
+**Note: app is mounted inside the docker, so any change is reloaded**
