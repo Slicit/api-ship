@@ -1,14 +1,3 @@
-version: '3.9'
-
-networks:
-  ship-network-ip:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.16.242.0/24
-          gateway: 172.16.242.1
-
 services:
   api_ship:
     build:
@@ -36,6 +25,3 @@ services:
       - "./vendor:/app/vendor"
       - "./config.ru:/app/config.ru"
       - "./.rspec:/app/.rspec"
-    networks:
-      ship-network-ip:
-        ipv4_address: 172.16.242.10
