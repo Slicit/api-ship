@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  host: <%= ENV.fetch("PG_HOST") { "127.0.0.1" } %>
+  port: 5432
+  username: <%= ENV.fetch("PG_USERNAME") { "guest" } %>
+  password: <%= ENV.fetch("PG_PASSWORD") { "guest" } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  database: <%= ENV.fetch("PG_DATABASE") { "default" } %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

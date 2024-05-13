@@ -1,0 +1,41 @@
+version: '3.9'
+
+networks:
+  ship-network-ip:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.242.0/24
+          gateway: 172.16.242.1
+
+services:
+  api_ship:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api_ship
+    container_name: api_ship
+    command: "bin/rails server -b 0.0.0.0"
+    restart: always
+    tty: true
+    env_file:
+      - .env
+    environment:
+      - RAILS_ENV=test
+      - BUNDLER_ENV=test
+    volumes:
+      - "./app:/app/app"
+      - "./bin:/app/bin"
+      - "./config:/app/config"
+      - "./db:/app/db"
+      - "./lib:/app/lib"
+      - "./log:/app/log"
+      - "./public:/app/public"
+      - "./spec:/app/spec"
+      - "./vendor:/app/vendor"
+      - "./config.ru:/app/config.ru"
+      - "./.rspec:/app/.rspec"
+    networks:
+      ship-network-ip:
+        ipv4_address: 172.16.242.10
